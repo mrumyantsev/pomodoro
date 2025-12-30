@@ -1,0 +1,80 @@
+:root {
+  --accent: #e80f0e;
+  --text: #8a130c;
+}
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.input-wrapper {
+  position: relative;
+  margin-top: 4px;
+}
+
+input {
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  padding: 10px;
+  width: 120px;
+  background-color: white;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+input:focus {
+  outline: none;
+}
+
+label {
+  position: absolute;
+  top: -6px;
+  left: 10px;
+  background-color: white;
+  padding: 0 5px;
+  font-size: 0.8em;
+  color: var(--text);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+button {
+  background-color: white;
+  border: 2px solid var(--accent);
+  border-radius: 30px;
+  box-shadow: var(--accent) 4px 4px 0 0;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-color: white;
+}
+
+button:active {
+  box-shadow: var(--accent) 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  button {
+    min-width: 140px;
+    padding: 0 25px;
+  }
+}
