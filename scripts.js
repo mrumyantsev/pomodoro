@@ -2,121 +2,134 @@ const input = document.getElementById('input');
 const button = document.getElementById('button');
 const sound = new Audio('./sounds/mechanical-alarm-clock.wav');
 
+const TIMER_TIME_MINUTES = 25;
 const RINGING_TIME_SECONDS = 10;
 
-const main = () => {
-    const text = new Text();
-    const ringer = new Ringer(text);
-    const timer = new Timer(text, ringer);
+class App {
+    #ringer;
+    #timer;
 
-    document.addEventListener('DOMContentLoaded', (event) => {
+    constructor() {
+        this.#ringer = new Ringer();
+        this.#timer = new Timer(this.#ringer);
+    }
+
+    run() {
+        input.value = String(TIMER_TIME_MINUTES);
+
         button.addEventListener('click', () => {
-            if (input.value === '') {
-                input.value = '0';
-            }
-
-            timer.toggle();
+            this.#handleButtonClick();
         });
-    });
+    }
+    
+    #handleButtonClick() {
+        if (input.valueAsNumber <= 0) {
+            input.value = '0';
+        }
+
+        if (this.#ringer.isOn) {
+            this.#ringer.off();
+        } else if (this.#timer.isOn) {
+            this.#timer.off();
+        } else {
+            this.#timer.on();
+        }
+    }
 }
 
 class Timer {
-    #intervalId;
-    #isActive;
-    #text;
+    #interval;
+    #isOn;
     #ringer;
 
-    constructor(text, ringer) {
-        this.#intervalId = 0;
-        this.#isActive = false;
-        this.#text = text;
+    constructor(ringer) {
+        this.#interval = 0;
+        this.#isOn = false;
         this.#ringer = ringer;
     }
 
-    get isActive() {
-        return this.#isActive;
+    get isOn() {
+        return this.#isOn;
     }
 
     on() {
-        this.#intervalId = setInterval(() => {
+        this.#interval = setInterval(() => {
             this.off();
             this.#ringer.on();
         }, input.valueAsNumber * 60 * 1000);
-        this.#isActive = true;
-        this.#text.setTimerSet();
+
+        Text.setTimerSet();
+
+        this.#isOn = true;
     }
 
     off() {
-        if (this.#ringer.isActive) {
-            this.#ringer.off();
-        }
+        clearInterval(this.#interval);
 
-        if (this.#isActive) {
-            clearInterval(this.#intervalId);
-            this.#isActive = false;
-            this.#text.setDefault();
-        }
-    }
+        Text.setDefault();
 
-    toggle() {
-        if (this.#isActive || this.#ringer.isActive) {
-            this.off();
-        } else {
-            this.on();
-        }
+        this.#isOn = false;
     }
 }
 
 class Ringer {
-    #intervalId;
-    #isActive;
-    #text;
+    #interval;
+    #isOn;
 
-    constructor(text) {
-        this.#intervalId = 0;
-        this.#isActive = false;
-        this.#text = text;
+    constructor() {
+        this.#interval = 0;
+        this.#isOn = false;
     }
 
-    get isActive() {
-        return this.#isActive;
+    get isOn() {
+        return this.#isOn;
     }
 
     on() {
         sound.play();
-        this.#intervalId = setInterval(() => {
+
+        this.#interval = setInterval(() => {
             this.off();
         }, RINGING_TIME_SECONDS * 1000);
-        this.#isActive = true;
-        this.#text.setRinging();
+
+        Text.setRinging();
+
+        this.#isOn = true;
     }
 
     off() {
         sound.pause();
         sound.currentTime = 0;
-        clearInterval(this.#intervalId);
-        this.#isActive = false;
-        this.#text.setDefault();
+
+        clearInterval(this.#interval);
+
+        Text.setDefault();
+
+        this.#isOn = false;
     }
 }
 
 class Text {
-    setDefault() {
-        this.#setTexts('Pomodoro', 'Start');
+    static APP_NAME = 'Pomodoro';
+
+    static setDefault() {
+        this.#set(this.APP_NAME, 'Start');
     }
 
-    setTimerSet() {
-        this.#setTexts('Pomodoro Set', 'Stop');
+    static setTimerSet() {
+        this.#set(this.APP_NAME + ' Set', 'Stop');
     }
 
-    setRinging() {
-        this.#setTexts('Pomodoro Ringing', 'Dismiss');
+    static setRinging() {
+        this.#set(this.APP_NAME + ' Ringing', 'Dismiss');
     }
 
-    #setTexts(documentTitle, buttonText) {
-        document.title = documentTitle;
+    static #set(titleText, buttonText) {
+        document.title = titleText;
         button.textContent = buttonText;
     }
 }
 
-main();
+const app = new App();
+
+app.run();
