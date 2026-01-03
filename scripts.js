@@ -38,12 +38,12 @@ class App {
 }
 
 class Timer {
-    #interval;
+    #timeoutId;
     #isOn;
     #ringer;
 
     constructor(ringer) {
-        this.#interval = 0;
+        this.#timeoutId = 0;
         this.#isOn = false;
         this.#ringer = ringer;
     }
@@ -53,7 +53,7 @@ class Timer {
     }
 
     on() {
-        this.#interval = setInterval(() => {
+        this.#timeoutId = setTimeout(() => {
             this.off();
             this.#ringer.on();
         }, input.valueAsNumber * 60 * 1000);
@@ -64,7 +64,7 @@ class Timer {
     }
 
     off() {
-        clearInterval(this.#interval);
+        clearTimeout(this.#timeoutId);
 
         Text.setDefault();
 
@@ -73,11 +73,11 @@ class Timer {
 }
 
 class Ringer {
-    #interval;
+    #timeoutId;
     #isOn;
 
     constructor() {
-        this.#interval = 0;
+        this.#timeoutId = 0;
         this.#isOn = false;
     }
 
@@ -88,7 +88,7 @@ class Ringer {
     on() {
         sound.play();
 
-        this.#interval = setInterval(() => {
+        this.#timeoutId = setTimeout(() => {
             this.off();
         }, RINGING_TIME_SECONDS * 1000);
 
@@ -101,7 +101,7 @@ class Ringer {
         sound.pause();
         sound.currentTime = 0;
 
-        clearInterval(this.#interval);
+        clearTimeout(this.#timeoutId);
 
         Text.setDefault();
 
