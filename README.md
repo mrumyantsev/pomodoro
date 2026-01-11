@@ -1,43 +1,47 @@
-# Pomodoro - таймер для работы по "методу помидора"
+# Pomodoro
 
-Данное одноэкранное веб-приложение представляет собой реализацию кухонного таймера.
+[![ru](https://img.shields.io/badge/lang-ru-red.svg)](./README.ru.md)
 
-По нажатию кнопки "Start" таймер устанавливается на количество минут, указанных в поле для ввода (по умолчанию: 25). По истечении времени воспроизводится звуковой сигнал, похожий на звон механического кухонного таймера.
+**Pomodoro** is a browser timer for doing Pomodoro Technique during work. Basically it's an implementation of a kitchen timer.
 
-![Скриншот](./pomodoro-web-ui.png "Веб-интерфейс приложения") \
-Веб-интерфейс приложения
+![Screenshot](./pomodoro-web-ui.png "Application Web UI") \
+Application Web UI
 
-## Установка и запуск
+## Installation
 
-1. Клонируйте репозиторий на свой компьютер.
+1. Clone the repository to your computer.
 
 ```bash
 git clone https://github.com/mrumyantsev/pomodoro.git
 ```
 
-2. Откройте файл `index.html` в веб-браузере, путем перетаскивания его в окно браузера или воспользовавшись меню **Файл->Открыть**.
+## Usage
 
-## Системные требования
+1. Open file `index.html` in your browser by dragging it into the browser window or using the menu **File->Open**.
 
-- Windows/Linux/macOS.
-- Веб-браузер.
+2. Press the "Start" button to set the timer for the number of minutes specified in the input field (default: 25). Once the timer has elapsed, a chime similar to a kitchen timer will play for 10 seconds.
 
-## Как работать по "методу помидора"?
+## System Requirements
 
-1. Откройте приложение в веб-браузере и держите его первой вкладкой. (Вам все равно понадобится веб-браузер по мере работы.)
-2. Запустите таймер на 25 минут, когда решите приняться за работу.
-3. Работаете сконцентрированно, не отвлекаясь на посторонние дела, пока не прозвенит звонок таймера.
-4. Когда раздастся звонок таймера остановите свою творческую деятельность и дайте себе небольшой перерыв (5-10 минут).
-5. Повторяйте шаги 2-4, пока вам нужно выполнять работу. Делайте большой перерыв (20-30 минут) после каждых 4-х "помидор".
+- Windows/Linux/macOS
+- A browser
 
-## Особенности
+## How to work using the Pomodoro Technique?
 
-- Можно устанавливать неограниченное количество минут.
+1. Open the application in your browser and keep it as the first tab. (You'll still need to use the browser while you work.)
+2. Start a timer for 25 minutes when you decide to start working.
+3. Work focused, without distractions, until the timer rings.
+4. When the timer rings, stop your creative work and take a short break (5-10 minutes).
+5. Repeat steps 2-4 as long as you need to get work done. Take a longer break (20-30 minutes) after every 4 pomodori are done.
 
-## Вдохновители
+## Features
 
-- "[Метод помидора](https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4_%D0%BF%D0%BE%D0%BC%D0%B8%D0%B4%D0%BE%D1%80%D0%B0)".
+- You can set an unlimited number of minutes.
 
-## Лицензия
+## Inspired By
 
-MIT License - открыть файл [лицензии](./LICENSE) для подробностей.
+- "[Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)"
+
+## License
+
+[MIT License](./LICENSE)
